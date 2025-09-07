@@ -13,16 +13,16 @@ namespace EpmloyeeAdminPortal.Controllers
         private readonly ApplicationDbContext _context;
         public EmployeesController(ApplicationDbContext dbContext)
         {
-            _context = dbContext;
+            this._context = dbContext;
         }
         [HttpGet]
-        public IActionResult GetAllEmployees() => Ok(_context.Employess.ToList());
+        public IActionResult GetAllEmployees() => Ok(this._context.Employess.ToList());
 
         [HttpGet]
         [Route("{id:guid}")]
         public IActionResult GetEmployeeById(Guid id)
         {
-            var employee = _context.Employess.Find(id);
+            var employee = this._context.Employess.Find(id);
 
             if (employee is null)
             {
@@ -43,8 +43,8 @@ namespace EpmloyeeAdminPortal.Controllers
                 Salary = addEmployeeDto.Salary,
             };
 
-            _context.Employess.Add(employeeEntity);
-            _context.SaveChanges();
+            this._context.Employess.Add(employeeEntity);
+            this._context.SaveChanges();
 
             return Ok(employeeEntity);
         }
@@ -53,7 +53,7 @@ namespace EpmloyeeAdminPortal.Controllers
         [Route("{id:guid}")]
         public IActionResult UpdateEmployee(Guid id, UpdateEmployeeDto updateEmployeeDto)
         {
-            var employee = _context.Employess.Find(id);
+            var employee = this._context.Employess.Find(id);
 
             if (employee is null)
             {
@@ -65,7 +65,7 @@ namespace EpmloyeeAdminPortal.Controllers
             employee.Phone = updateEmployeeDto.Phone;
             employee.Salary = updateEmployeeDto.Salary;
 
-            _context.SaveChanges();
+            this._context.SaveChanges();
 
             return Ok(employee);
         }
@@ -74,15 +74,15 @@ namespace EpmloyeeAdminPortal.Controllers
         [Route("{id:guid}")]
         public IActionResult DeleteEmployee(Guid id)
         {
-            var employee = _context.Employess.Find(id);
+            var employee = this._context.Employess.Find(id);
 
             if (employee is null)
             {
                 return NotFound();
             }
 
-            _context.Employess.Remove(employee);
-            _context.SaveChanges();
+            this._context.Employess.Remove(employee);
+            this._context.SaveChanges();
 
             return Ok(employee);
         }
