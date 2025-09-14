@@ -1,6 +1,6 @@
-﻿namespace EpmloyeeAdminPortal.Models;
+﻿namespace EpmloyeeAdminPortal.Employees.GetEmployee.Dtos;
 
-public class UpdateEmployeeDto
+public class GetEmployeeDto
 {
     public required string Name { get; set; }
     public required string Email { get; set; }

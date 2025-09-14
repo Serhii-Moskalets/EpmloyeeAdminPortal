@@ -1,4 +1,4 @@
-﻿namespace EpmloyeeAdminPortal.Models;
+﻿namespace EpmloyeeAdminPortal.Employees.AddEmployee.Dtos;
 
 public class AddEmployeeDto
 {

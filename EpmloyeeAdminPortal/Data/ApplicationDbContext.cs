@@ -7,6 +7,6 @@ namespace EpmloyeeAdminPortal.Data
     {
         public ApplicationDbContext(DbContextOptions options) : 
             base(options) { }
-        public DbSet<Employee> Employess { get; set; } = null!;
+        public DbSet<Employee> Employees { get; set; } = null!;
     }
 }

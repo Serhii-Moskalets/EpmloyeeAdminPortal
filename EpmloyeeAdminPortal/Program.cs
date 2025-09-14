@@ -1,4 +1,5 @@
 using EpmloyeeAdminPortal.Data;
+using EpmloyeeAdminPortal.Extentions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDataServices();
 
 var app = builder.Build();
 
