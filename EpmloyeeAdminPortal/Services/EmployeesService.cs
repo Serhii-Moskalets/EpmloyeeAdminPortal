@@ -17,58 +17,61 @@ public class EmployeesService : IEmployeesService
         this._context = context;
     }
 
-    public async Task<GetEmployeeOutput> AddEmployeeAsync(EmployeeInput input)
+    public async Task<AddEmployeeOutput> AddEmployeeAsync(AddEmployeeInput input)
     {
-        await this._context.Employees.AddAsync(input.Employee);
+        Employee employee = input.Employee;
+
+        await this._context.Employees.AddAsync(employee);
         await this._context.SaveChangesAsync();
 
-        return new GetEmployeeOutput { Employee = input.Employee };
+        return new AddEmployeeOutput { Employee = employee };
     }
 
-    public async Task<GetEmployeeOutput?> DeleteEmployeeAsync(Guid id)
+    public async Task<DeleteEmployeeOutput> DeleteEmployeeAsync(DeleteEmployeeInput input)
     {
+        Guid employeeId = input.EmployeeId;
         var employee = await this._context.Employees
-            .FirstOrDefaultAsync(e => e.EmployeeId == id && !e.IsDeleted);
+            .FirstOrDefaultAsync(e => e.EmployeeId == employeeId && !e.IsDeleted);
 
         if (employee is null)
         {
-            return null;
+            return new DeleteEmployeeOutput { Success = false };
         }
 
         employee.IsDeleted = true;
         await this._context.SaveChangesAsync();
 
-        return new GetEmployeeOutput { Employee = employee };
+        return new DeleteEmployeeOutput { Success = true };
     }
 
-    public async Task<List<GetEmployeeOutput>> GetAllEmployeesAsync()
+    public async Task<GetAllEmployeeOutput> GetAllEmployeesAsync()
     {
         var employees = await this._context.Employees.Where(e => !e.IsDeleted).ToListAsync();
 
-        return employees.Select(e => new GetEmployeeOutput { Employee = e }).ToList();
+        return new GetAllEmployeeOutput() { Employees = employees };
     }
 
-
-    public async Task<GetEmployeeOutput?> GetEmployeeByIdAsync(Guid id)
+    public async Task<GetEmployeeByIdOutput> GetEmployeeByIdAsync(GetEmployeeByIdInput input)
     {
+        Guid employeeId = input.EmployeeId;
         Employee? employee = await this._context.Employees
-            .FirstOrDefaultAsync(x => x.EmployeeId == id && !x.IsDeleted);
+            .FirstOrDefaultAsync(x => x.EmployeeId == employeeId && !x.IsDeleted);
 
         if (employee is null)
         {
-            return null;
+            return new GetEmployeeByIdOutput { Employee = null };
         }
 
-        return new GetEmployeeOutput { Employee = employee };
+        return new GetEmployeeByIdOutput() { Employee = employee };
     }
 
-    public async Task<GetEmployeeOutput?> UpdateEmployeeAsync(Guid id, EmployeeInput input)
+    public async Task<UpdateEmployeeOutput> UpdateEmployeeAsync(UpdateEmployeeInput input)
     {
-        Employee? employee = await this._context.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
+        var employee = await this._context.Employees.FirstOrDefaultAsync(x => x.EmployeeId == input.EmployeeId);
 
         if (employee is null)
         {
-            return null;
+            return new UpdateEmployeeOutput { Employee = null };
         }
 
         employee.Name = input.Employee.Name;
@@ -77,6 +80,6 @@ public class EmployeesService : IEmployeesService
         employee.Salary = input.Employee.Salary;
         
         await this._context.SaveChangesAsync();
-        return new GetEmployeeOutput { Employee = employee };
+        return new UpdateEmployeeOutput() { Employee = employee };
     }
 }

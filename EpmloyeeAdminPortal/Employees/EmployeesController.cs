@@ -1,5 +1,8 @@
 ﻿using EpmloyeeAdminPortal.Employees.AddEmployee;
+using EpmloyeeAdminPortal.Employees.DeleteEmployee;
 using EpmloyeeAdminPortal.Employees.GetEmployee;
+using EpmloyeeAdminPortal.Employees.GetEmpoloyeeById;
+using EpmloyeeAdminPortal.Employees.UpdateEmployee;
 using EpmloyeeAdminPortal.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,62 +21,65 @@ public class EmployeesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllEmployeesAsync()
     {
-        var employees = await this._employeeService.GetAllEmployeesAsync();
+        var output = await this._employeeService.GetAllEmployeesAsync();
 
-        var correctEmployees = GetEmployeeMapper.MapOutputListToResponseList(employees);
+        var response = new GetAllEmployeeMapper().Map(output);
 
-        return this.Ok(correctEmployees);
+        return this.Ok(response);
     }
 
     [HttpGet]
     [Route("{id:guid}")]
     public async Task<IActionResult> GetEmployeeByIdAsync(Guid id)
     {
-        var employee = await this._employeeService.GetEmployeeByIdAsync(id);
-        if (employee == null)
+        var request = new GetEmpoloyeeById.Request { EmployeeId = id };
+        var input = new GetEmpoloyeeByIdMapper().Map(request);
+        var output = await this._employeeService.GetEmployeeByIdAsync(input);
+
+        if (output.Employee is null)
         {
             return this.NotFound();
         }
 
-        var correctEmployee = GetEmployeeMapper.MapOutputToResponse(employee);
-        return this.Ok(correctEmployee);
+        var response = new GetEmpoloyeeByIdMapper().Map(output);
+        return this.Ok(response);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddEmployeeAsync(AddEmployeeRequest employeeRequest)
+    public async Task<IActionResult> AddEmployeeAsync(AddEmployee.Request employeeRequest)
     {
-        var employee = AddEmployeeMapper.MapRequestToInput(employeeRequest);
-        await this._employeeService.AddEmployeeAsync(employee);
-        return this.Ok();
+        var input = new AddEmployeeMapper().Map(employeeRequest);
+        var output = await this._employeeService.AddEmployeeAsync(input);
+        var response = new AddEmployeeMapper().Map(output);
+        return this.Ok(response);
     }
 
     [HttpPut]
     [Route("{id:guid}")]
-    public async Task<IActionResult> UpdateEmployeeAsync(Guid id, GetEmployeeRequest employeeRequest)
+    public async Task<IActionResult> UpdateEmployeeAsync(Guid id, UpdateEmployee.Request employeeRequest)
     {
-        var employeeInput = GetEmployeeMapper.MapRequestToInput(employeeRequest);
-        var updatedEmployee = await this._employeeService.UpdateEmployeeAsync(id, employeeInput);
+        employeeRequest.EmployeeId = id;
+        var input = new UpdateEmployeeMapper().Map(employeeRequest);
+        var output = await this._employeeService.UpdateEmployeeAsync(input);
 
-        if (updatedEmployee == null)
+        if (output.Employee is null)
         {
             return this.NotFound();
         }
 
-        var correctEmployee = GetEmployeeMapper.MapOutputToResponse(updatedEmployee);
-        return this.Ok(correctEmployee);
+        var response = new UpdateEmployeeMapper().Map(output);
+        return this.Ok(response);
     }
 
     [HttpDelete]
     [Route("{id:guid}")]
     public async Task<IActionResult> DeleteEmployee(Guid id)
     {
-        var deletedEmployee = await this._employeeService.DeleteEmployeeAsync(id);
-        if (deletedEmployee == null)
-        {
-            return this.NotFound();
-        }
+        var request = new DeleteEmployee.Request { EmployeeId = id };
+        var input = new DeleteEmployeeMapper().Map(request);
 
-        var correctEmployee = GetEmployeeMapper.MapOutputToResponse(deletedEmployee);
-        return this.Ok(correctEmployee);
+        var output = await this._employeeService.DeleteEmployeeAsync(input);
+        
+        return output.Success ? this.Ok(output) : this.NotFound(output);
     }
 }
