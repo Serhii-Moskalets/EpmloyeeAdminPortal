@@ -1,6 +1,6 @@
 ﻿namespace EpmloyeeAdminPortal.Employees.GetEmployee.Dtos;
 
-public class GetEmployeeDto
+public class EmployeeDto
 {
     public required string Name { get; set; }
     public required string Email { get; set; }

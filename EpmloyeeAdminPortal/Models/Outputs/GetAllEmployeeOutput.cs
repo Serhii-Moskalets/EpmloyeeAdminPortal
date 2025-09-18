@@ -2,7 +2,7 @@
 
 namespace EpmloyeeAdminPortal.Models.Outputs;
 
-public class GetEmployeeOutput
+public class GetAllEmployeeOutput
 {
-    public Employee? Employee { get; set; }
+    public List<Employee> Employees { get; set; } = [];
 }

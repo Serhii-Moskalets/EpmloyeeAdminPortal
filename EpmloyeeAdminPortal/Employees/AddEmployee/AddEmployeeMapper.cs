@@ -1,24 +1,20 @@
-﻿using Azure.Core;
+﻿using EpmloyeeAdminPortal.Employees.AddEmployee.Dtos;
 using EpmloyeeAdminPortal.Models.Entities;
 using EpmloyeeAdminPortal.Models.Inputs;
+using EpmloyeeAdminPortal.Models.Outputs;
+using Riok.Mapperly.Abstractions;
 
 namespace EpmloyeeAdminPortal.Employees.AddEmployee
 {
-    public static class AddEmployeeMapper
+    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
+    public partial class AddEmployeeMapper
     {
-        public static EmployeeInput MapRequestToInput(AddEmployeeRequest request)
-        {
-            return new EmployeeInput
-            {
-                Employee = new Employee
-                {
-                    EmployeeId = Guid.NewGuid(),
-                    Name = request.Employee.Name,
-                    Email = request.Employee.Email,
-                    Phone = request.Employee.Phone,
-                    Salary = request.Employee.Salary,
-                }
-            };
-        }
+        public partial AddEmployeeInput Map(Request request);
+
+        public partial Response Map(AddEmployeeOutput output);
+
+        public partial EmployeeDto Map(Employee entity);
+
+        public partial Employee Map(EmployeeDto dto);
     }
 }

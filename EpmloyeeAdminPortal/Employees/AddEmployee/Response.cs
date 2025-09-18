@@ -2,8 +2,8 @@
 
 namespace EpmloyeeAdminPortal.Employees.AddEmployee
 {
-    public class AddEmployeeRequest
+    public class Response
     {
-        public AddEmployeeDto Employee { get; set; } = null!;
+        public EmployeeDto Employee { get; set; } = null!;
     }
 }
