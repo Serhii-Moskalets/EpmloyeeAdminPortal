@@ -11,10 +11,6 @@ namespace EpmloyeeAdminPortal.Employees.AddEmployee
     {
         public partial AddEmployeeInput Map(Request request);
 
-        public partial Response Map(AddEmployeeOutput output);
-
-        public partial EmployeeDto Map(Employee entity);
-
         public partial Employee Map(EmployeeDto dto);
     }
 }

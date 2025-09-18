@@ -1,8 +1,9 @@
 ﻿using EpmloyeeAdminPortal.Models.Entities;
+using TinyResult;
 
 namespace EpmloyeeAdminPortal.Models.Outputs;
 
 public class UpdateEmployeeOutput
 {
-    public Employee? Employee { get; set; }
+    public Result<bool> Result { get; set; } = null!;
 }

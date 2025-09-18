@@ -10,9 +10,9 @@ namespace EpmloyeeAdminPortal.Employees.GetEmployee
     [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
     public partial class GetEmpoloyeeByIdMapper
     {
-        public partial GetEmployeeByIdInput Map(Request request);
+        public partial GetEmployeeByIdInput Map(GetEmpoloyeeByIdRequest request);
 
-        public partial Response Map(GetEmployeeByIdOutput output);
+        public partial GetEmpoloyeeByIdResponse Map(GetEmployeeByIdOutput output);
 
         public partial Employee Map(EmployeeDto dto);
 

@@ -4,6 +4,6 @@ namespace EpmloyeeAdminPortal.Models.Inputs;
 
 public class UpdateEmployeeInput
 {
-    public Guid EmployeeId { get; set; }
+    public Guid Id { get; set; }
     public Employee Employee { get; set; } = null!;
 }

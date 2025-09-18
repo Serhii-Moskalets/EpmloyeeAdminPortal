@@ -8,7 +8,7 @@ namespace EpmloyeeAdminPortal.Employees.GetEmpoloyeeById
     [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
     public partial class GetAllEmployeeMapper
     {
-        public partial Response Map(GetAllEmployeeOutput output);
+        public partial GetAllEmployeesResponse Map(GetAllEmployeeOutput output);
         public partial Employee Map(EmployeeDto dto);
 
     }

@@ -2,5 +2,5 @@
 
 public class GetEmployeeByIdInput
 {
-    public Guid EmployeeId { get; set; }
+    public Guid Id { get; set; }
 }

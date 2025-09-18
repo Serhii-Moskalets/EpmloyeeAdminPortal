@@ -3,10 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace EpmloyeeAdminPortal.Employees.UpdateEmployee
 {
-    public class Request
+    public class UpdateEmployeeRequest
     {
         [JsonIgnore]
-        public Guid EmployeeId { get; set; }
+        public Guid Id { get; set; }
         public EmployeeDto Employee { get; set; } = null!;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace EpmloyeeAdminPortal.Employees.GetEmployee
 {
-    public class Response
+    public class GetEmpoloyeeByIdResponse
     {
         public EmployeeDto? Employee { get; set; }
     }

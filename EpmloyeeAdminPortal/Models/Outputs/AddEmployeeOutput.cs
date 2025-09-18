@@ -1,8 +1,10 @@
 ﻿using EpmloyeeAdminPortal.Models.Entities;
+using TinyResult;
 
 namespace EpmloyeeAdminPortal.Models.Outputs;
 
 public class AddEmployeeOutput
 {
-    public Employee Employee { get; set; } = null!;
+    public Result<bool> Result { get; set; } = null!;
 }
+//simple result так же на перевірку
