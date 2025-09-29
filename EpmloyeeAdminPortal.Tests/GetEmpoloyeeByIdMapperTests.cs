@@ -9,12 +9,12 @@ namespace EpmloyeeAdminPortal.Tests;
 [TestClass]
 public class GetEmpoloyeeByIdMapperTests
 {
-    private GetEmpoloyeeByIdMapper _mapper = null!;
+    private GetEmployeeByIdMapper _mapper = null!;
 
     [TestInitialize]
     public void Setup()
     {
-        this._mapper = new GetEmpoloyeeByIdMapper();
+        this._mapper = new GetEmployeeByIdMapper();
     }
 
     [TestMethod]
@@ -60,7 +60,7 @@ public class GetEmpoloyeeByIdMapperTests
     [TestMethod]
     public void GetEmpoloyeeByIdRequest_To_Input_Mapping_Works()
     {
-        var request = new GetEmpoloyeeByIdRequest { Id = Guid.NewGuid() };
+        var request = new GetEmployeeByIdRequest { Id = Guid.NewGuid() };
 
         var input = this._mapper.Map(request);
 

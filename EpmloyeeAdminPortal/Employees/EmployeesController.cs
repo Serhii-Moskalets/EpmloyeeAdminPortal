@@ -4,8 +4,8 @@ using EpmloyeeAdminPortal.Employees.GetEmployee;
 using EpmloyeeAdminPortal.Employees.GetEmpoloyeeById;
 using EpmloyeeAdminPortal.Employees.UpdateEmployee;
 using EpmloyeeAdminPortal.Interfaces.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using TinyResult;
 using TinyResult.Enums;
 
 namespace EpmloyeeAdminPortal.Employees;
@@ -32,29 +32,45 @@ public class EmployeesController : ControllerBase
 
     [HttpGet]
     [Route("{id:guid}")]
-    public async Task<IActionResult> GetEmployeeByIdAsync(Guid id)
+    public async Task<IActionResult> GetEmployeeByIdAsync(Guid id, [FromServices] IValidator<GetEmployeeByIdRequest> validator)
     {
-        var request = new GetEmpoloyeeByIdRequest { Id = id };
-        var input = new GetEmpoloyeeByIdMapper().Map(request);
+        var request = new GetEmployeeByIdRequest { Id = id };
+        var validationRequest = await validator.ValidateAsync(request);
+
+        if (!validationRequest.IsValid)
+        {
+            return this.BadRequest(validationRequest.Errors
+                .Select(e => new { e.PropertyName, e.ErrorMessage }));
+        }
+
+        var input = new GetEmployeeByIdMapper().Map(request);
         var output = await this._employeeService.GetEmployeeByIdAsync(input);
 
-        if (output.Employee is null)
+        if (output is null)
         {
             return this.NotFound();
         }
 
-        var response = new GetEmpoloyeeByIdMapper().Map(output);
+        var response = new GetEmployeeByIdMapper().Map(output);
         return this.Ok(response);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddEmployeeAsync(AddEmployee.Request employeeRequest)
+    public async Task<IActionResult> AddEmployeeAsync(AddEmployeeRequest employeeRequest, [FromServices] IValidator<AddEmployeeRequest> validator)
     {
+        var validationRequest = await validator.ValidateAsync(employeeRequest);
+        if (!validationRequest.IsValid)
+        {
+            return this.BadRequest(validationRequest.Errors.Select(e => new { e.PropertyName, e.ErrorMessage }));
+        }
+
         var input = new AddEmployeeMapper().Map(employeeRequest);
         var result = await this._employeeService.AddEmployeeAsync(input);
 
         if (result.IsSuccess)
+        {
             return this.Ok(new { Message = "Employee added successfully" });
+        }
 
         return result.Error!.Code switch
         {
@@ -66,9 +82,15 @@ public class EmployeesController : ControllerBase
 
     [HttpPut]
     [Route("{id:guid}")]
-    public async Task<IActionResult> UpdateEmployeeAsync(Guid id, UpdateEmployeeRequest employeeRequest)
+    public async Task<IActionResult> UpdateEmployeeAsync(Guid id, UpdateEmployeeRequest employeeRequest, [FromServices] IValidator<UpdateEmployeeRequest> validator)
     {
         employeeRequest.Id = id;
+        var validationRequest = await validator.ValidateAsync(employeeRequest);
+
+        if (!validationRequest.IsValid)
+        {
+            return this.BadRequest(validationRequest.Errors.Select(e => new { e.PropertyName, e.ErrorMessage }));
+        }
         var input = new UpdateEmployeeMapper().Map(employeeRequest);
         var result = await this._employeeService.UpdateEmployeeAsync(input);
 
@@ -79,10 +101,18 @@ public class EmployeesController : ControllerBase
 
     [HttpDelete]
     [Route("{id:guid}")]
-    public async Task<IActionResult> DeleteEmployee(Guid id)
+    public async Task<IActionResult> DeleteEmployee(Guid id, [FromServices] IValidator<DeleteEmployeeRequest> validator)
     {
-        var request = new DeleteEmployeeRequest { Id = id };
-        var input = new DeleteEmployeeMapper().Map(request);
+        var employeeRequest = new DeleteEmployeeRequest { Id = id };
+
+        var validationRequest = await validator.ValidateAsync(employeeRequest);
+
+        if (!validationRequest.IsValid)
+        {
+            return this.BadRequest(validationRequest.Errors.Select(e => new { e.PropertyName, e.ErrorMessage }));
+        }
+
+        var input = new DeleteEmployeeMapper().Map(employeeRequest);
 
         var result = await this._employeeService.DeleteEmployeeAsync(input);
 

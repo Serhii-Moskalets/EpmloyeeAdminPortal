@@ -1,4 +1,5 @@
 ﻿using EpmloyeeAdminPortal.Models.Entities;
+using TinyResult;
 
 namespace EpmloyeeAdminPortal.Models.Outputs;
 

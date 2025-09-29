@@ -9,7 +9,7 @@ namespace EpmloyeeAdminPortal.Employees.AddEmployee
     [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
     public partial class AddEmployeeMapper
     {
-        public partial AddEmployeeInput Map(Request request);
+        public partial AddEmployeeInput Map(AddEmployeeRequest request);
 
         public partial Employee Map(EmployeeDto dto);
     }

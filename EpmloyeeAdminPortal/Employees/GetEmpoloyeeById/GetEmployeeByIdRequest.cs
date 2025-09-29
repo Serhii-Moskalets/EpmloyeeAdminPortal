@@ -1,6 +1,6 @@
 ﻿namespace EpmloyeeAdminPortal.Employees.GetEmpoloyeeById
 {
-    public class GetEmpoloyeeByIdRequest
+    public class GetEmployeeByIdRequest
     {
         public Guid Id { get; set; }
     }
