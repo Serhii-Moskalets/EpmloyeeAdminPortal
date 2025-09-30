@@ -6,9 +6,6 @@ public class UpdateEmployeeValidator : AbstractValidator<UpdateEmployeeRequest>
 {
     public UpdateEmployeeValidator()
     {
-        this.RuleFor(x => x.Id)
-            .NotEmpty().WithMessage("Name is required");
-
         this.RuleFor(x => x.Employee.Name)
             .NotEmpty().WithMessage("Name is required")
             .Matches("^[a-zA-Z  ']+$").WithMessage("Name cannot contain numbers or special characters");

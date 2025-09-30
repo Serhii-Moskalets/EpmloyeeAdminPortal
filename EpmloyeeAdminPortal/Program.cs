@@ -1,22 +1,15 @@
 using EpmloyeeAdminPortal.Data;
 using EpmloyeeAdminPortal.Employees.AddEmployee;
-using EpmloyeeAdminPortal.Employees.DeleteEmployee;
-using EpmloyeeAdminPortal.Employees.GetEmpoloyeeById;
 using EpmloyeeAdminPortal.Employees.UpdateEmployee;
 using EpmloyeeAdminPortal.Extentions;
 using EpmloyeeAdminPortal.Services.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-builder.Services.AddValidatorsFromAssemblyContaining<AddEmployeeValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<DeleteEmployeeValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<GetEmployeeByIdValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UpdateEmployeeValidator>();
-builder.Services.AddScoped<EmployeeExistsValidator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

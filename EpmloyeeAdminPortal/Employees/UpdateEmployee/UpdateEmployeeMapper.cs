@@ -5,7 +5,8 @@ using Riok.Mapperly.Abstractions;
 
 namespace EpmloyeeAdminPortal.Employees.UpdateEmployee
 {
-    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
+    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Source)]
+
     public partial class UpdateEmployeeMapper
     {
         public partial UpdateEmployeeInput Map(UpdateEmployeeRequest request);

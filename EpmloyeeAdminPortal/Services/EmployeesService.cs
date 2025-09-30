@@ -2,7 +2,7 @@
 using EpmloyeeAdminPortal.Interfaces.Services;
 using EpmloyeeAdminPortal.Models.Inputs;
 using EpmloyeeAdminPortal.Models.Outputs;
-using EpmloyeeAdminPortal.Services.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using TinyResult;
 using TinyResult.Enums;
@@ -12,14 +12,22 @@ namespace EpmloyeeAdminPortal.Services;
 public class EmployeesService : IEmployeesService
 {
     private readonly ApplicationDbContext _context;
-    private readonly EmployeeExistsValidator _employeeValidator;
+    private readonly IValidator<GetEmployeeByIdInput> _getByIdValidator;
+    private readonly IValidator<UpdateEmployeeInput> _updateValidator;
+    private readonly IValidator<DeleteEmployeeInput> _deleteValidator;
 
-    public EmployeesService(ApplicationDbContext context, EmployeeExistsValidator employeeValidator)
+    public EmployeesService(
+        ApplicationDbContext context,
+        IValidator<GetEmployeeByIdInput> getByIdValidator,
+        IValidator<UpdateEmployeeInput> updateValidator,
+        IValidator<DeleteEmployeeInput> deleteValidator)
     {
-        ArgumentNullException.ThrowIfNull(context);
         this._context = context;
-        this._employeeValidator = employeeValidator;
+        this._getByIdValidator = getByIdValidator;
+        this._updateValidator = updateValidator;
+        this._deleteValidator = deleteValidator;
     }
+
     public async Task<GetAllEmployeeOutput> GetAllEmployeesAsync()
     {
         var employees = await this._context.Employees.Where(e => !e.IsDeleted).ToListAsync();
@@ -27,11 +35,26 @@ public class EmployeesService : IEmployeesService
         return new GetAllEmployeeOutput { Employees = employees };
     }
 
-    public async Task<GetEmployeeByIdOutput> GetEmployeeByIdAsync(GetEmployeeByIdInput input)
+    public async Task<Result<GetEmployeeByIdOutput>> GetEmployeeByIdAsync(GetEmployeeByIdInput input)
     {
-        var employee = await this._employeeValidator.GetEmployeeAsync(input.Id);
+        var validationResult = await this._getByIdValidator.ValidateAsync(input);
 
-        return new GetEmployeeByIdOutput { Employee = employee};
+        if (!validationResult.IsValid)
+        {
+            return Result<GetEmployeeByIdOutput>.Failure(Error.Create(ErrorCode.ValidationError, validationResult.Errors.First().ErrorMessage));
+        }
+
+        var employee = await this._context.Employees
+            .FirstOrDefaultAsync(e => e.EmployeeId == input.Id && !e.IsDeleted);
+
+        if (employee is null)
+        {
+            return Result<GetEmployeeByIdOutput>.Failure(Error.Create(ErrorCode.NotFound, "Employee not found"));
+        }
+
+        var output = new GetEmployeeByIdOutput { Employee = employee! };
+
+        return Result<GetEmployeeByIdOutput>.Success(output);
     }
 
     public async Task<Result<bool>> AddEmployeeAsync(AddEmployeeInput input)
@@ -43,21 +66,38 @@ public class EmployeesService : IEmployeesService
 
     public async Task<Result<bool>> DeleteEmployeeAsync(DeleteEmployeeInput input)
     {
-        var employee = await this._employeeValidator.GetEmployeeAsync(input.Id);
+        var validationResult = await this._deleteValidator.ValidateAsync(input);
+
+        if (!validationResult.IsValid)
+        {
+            return Result<bool>.Failure(Error.Create(ErrorCode.ValidationError, validationResult.Errors.First().ErrorMessage));
+        }
+
+        var employee = await this._context.Employees
+            .FirstOrDefaultAsync(e => e.EmployeeId == input.Id && !e.IsDeleted);
+
         if (employee is null)
         {
             return Result<bool>.Failure(Error.Create(ErrorCode.NotFound, "Employee not found"));
         }
 
-        employee.IsDeleted = true;
+        employee!.IsDeleted = true;
         var saved = await this._context.SaveChangesAsync();
         return CreateResultFromSave(saved, "Failed to delete employee");
     }
 
-
     public async Task<Result<bool>> UpdateEmployeeAsync(UpdateEmployeeInput input)
     {
-        var employee = await this._employeeValidator.GetEmployeeAsync(input.Id);
+        var validationResult = await this._updateValidator.ValidateAsync(input);
+
+        if (!validationResult.IsValid)
+        {
+            return Result<bool>.Failure(Error.Create(ErrorCode.ValidationError, validationResult.Errors.First().ErrorMessage));
+        }
+
+        var employee = await this._context.Employees
+            .FirstOrDefaultAsync(e => e.EmployeeId == input.Id && !e.IsDeleted);
+
         if (employee is null)
         {
             return Result<bool>.Failure(Error.Create(ErrorCode.NotFound, "Employee not found"));

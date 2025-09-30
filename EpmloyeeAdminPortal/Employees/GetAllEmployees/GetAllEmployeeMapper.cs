@@ -5,11 +5,12 @@ using Riok.Mapperly.Abstractions;
 
 namespace EpmloyeeAdminPortal.Employees.GetEmpoloyeeById
 {
-    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
+    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+
     public partial class GetAllEmployeeMapper
     {
         public partial GetAllEmployeesResponse Map(GetAllEmployeeOutput output);
-        public partial Employee Map(EmployeeDto dto);
 
+        public partial EmployeeDto Map(Employee employee);
     }
 }

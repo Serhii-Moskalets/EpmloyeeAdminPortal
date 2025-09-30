@@ -1,5 +1,5 @@
-﻿using EpmloyeeAdminPortal.Employees.UpdateEmployee.Dtos;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using EpmloyeeAdminPortal.Employees.UpdateEmployee.Dtos;
 
 namespace EpmloyeeAdminPortal.Employees.UpdateEmployee
 {
@@ -7,6 +7,7 @@ namespace EpmloyeeAdminPortal.Employees.UpdateEmployee
     {
         [JsonIgnore]
         public Guid Id { get; set; }
+
         public EmployeeDto Employee { get; set; } = null!;
     }
 }

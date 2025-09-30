@@ -4,6 +4,6 @@ namespace EpmloyeeAdminPortal.Employees.GetEmployee
 {
     public class GetEmployeeByIdResponse
     {
-        public EmployeeDto? Employee { get; set; }
+        public EmployeeDto Employee { get; set; } = null!;
     }
 }

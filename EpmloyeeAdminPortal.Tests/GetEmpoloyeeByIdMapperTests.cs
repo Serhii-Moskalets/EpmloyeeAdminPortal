@@ -9,12 +9,14 @@ namespace EpmloyeeAdminPortal.Tests;
 [TestClass]
 public class GetEmpoloyeeByIdMapperTests
 {
-    private GetEmployeeByIdMapper _mapper = null!;
+    private GetEmployeeByIdSourseMapper _sourseMapper = null!;
+    private GetEmployeeByIdTargetMapper _targetMapper = null!;
 
     [TestInitialize]
     public void Setup()
     {
-        this._mapper = new GetEmployeeByIdMapper();
+        this._sourseMapper = new GetEmployeeByIdSourseMapper();
+        this._targetMapper = new GetEmployeeByIdTargetMapper();
     }
 
     [TestMethod]
@@ -28,7 +30,7 @@ public class GetEmpoloyeeByIdMapperTests
             Salary = 1000,
         };
 
-        var entity = this._mapper.Map(dto);
+        var entity = this._sourseMapper.Map(dto);
 
         Assert.IsNotNull(entity);
         Assert.AreEqual(dto.Name, entity.Name);
@@ -48,7 +50,7 @@ public class GetEmpoloyeeByIdMapperTests
             Salary = 2000,
         };
 
-        var dto = this._mapper.Map(entity);
+        var dto = this._targetMapper.Map(entity);
 
         Assert.IsNotNull(dto);
         Assert.AreEqual(entity.Name, dto.Name);
@@ -62,7 +64,7 @@ public class GetEmpoloyeeByIdMapperTests
     {
         var request = new GetEmployeeByIdRequest { Id = Guid.NewGuid() };
 
-        var input = this._mapper.Map(request);
+        var input = this._sourseMapper.Map(request);
 
         Assert.AreEqual(request.Id, input.Id);
     }
@@ -78,11 +80,11 @@ public class GetEmpoloyeeByIdMapperTests
                 Email = "alice@example.com",
                 Phone = "555555",
                 Salary = 1500,
-                IsDeleted = false
-            }
+                IsDeleted = false,
+            },
         };
 
-        var response = this._mapper.Map(output);
+        var response = this._targetMapper.Map(output);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(output.Employee.Name, response.Employee!.Name);
