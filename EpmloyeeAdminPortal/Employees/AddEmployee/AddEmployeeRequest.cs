@@ -1,9 +1,8 @@
-﻿using EpmloyeeAdminPortal.Employees.AddEmployee.Dtos;
+﻿using EmployeeAdminPortal.Employees.AddEmployee.Dtos;
 
-namespace EpmloyeeAdminPortal.Employees.AddEmployee
+namespace EmployeeAdminPortal.Employees.AddEmployee;
+
+public class AddEmployeeRequest
 {
-    public class AddEmployeeRequest
-    {
-        public EmployeeDto Employee { get; set; } = null!;
-    }
+    public EmployeeDto Employee { get; set; } = null!;
 }

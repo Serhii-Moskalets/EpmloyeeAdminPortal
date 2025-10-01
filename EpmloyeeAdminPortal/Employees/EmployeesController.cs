@@ -1,15 +1,15 @@
-﻿using EpmloyeeAdminPortal.Employees.AddEmployee;
-using EpmloyeeAdminPortal.Employees.DeleteEmployee;
-using EpmloyeeAdminPortal.Employees.GetEmployee;
-using EpmloyeeAdminPortal.Employees.GetEmpoloyeeById;
-using EpmloyeeAdminPortal.Employees.UpdateEmployee;
-using EpmloyeeAdminPortal.Interfaces.Services;
+﻿using EmployeeAdminPortal.Employees.AddEmployee;
+using EmployeeAdminPortal.Employees.DeleteEmployee;
+using EmployeeAdminPortal.Employees.GetAllEmployees;
+using EmployeeAdminPortal.Employees.GetEmployeeById;
+using EmployeeAdminPortal.Employees.UpdateEmployee;
+using EmployeeAdminPortal.Interfaces.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TinyResult;
 using TinyResult.Enums;
 
-namespace EpmloyeeAdminPortal.Employees;
+namespace EmployeeAdminPortal.Employees;
 
 // localhost:xxxx/api/
 [Route("api/[controller]")]

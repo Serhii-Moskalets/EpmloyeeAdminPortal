@@ -1,8 +1,8 @@
-using EpmloyeeAdminPortal.Data;
-using EpmloyeeAdminPortal.Employees.AddEmployee;
-using EpmloyeeAdminPortal.Employees.UpdateEmployee;
-using EpmloyeeAdminPortal.Extentions;
-using EpmloyeeAdminPortal.Services.Validators;
+using EmployeeAdminPortal.Data;
+using EmployeeAdminPortal.Employees.AddEmployee;
+using EmployeeAdminPortal.Employees.UpdateEmployee;
+using EmployeeAdminPortal.Extentions;
+using EmployeeAdminPortal.Services.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 

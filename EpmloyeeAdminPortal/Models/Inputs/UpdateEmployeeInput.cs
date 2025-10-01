@@ -1,6 +1,6 @@
-﻿using EpmloyeeAdminPortal.Models.Entities;
+﻿using EmployeeAdminPortal.Models.Entities;
 
-namespace EpmloyeeAdminPortal.Models.Inputs;
+namespace EmployeeAdminPortal.Models.Inputs;
 
 public class UpdateEmployeeInput
 {

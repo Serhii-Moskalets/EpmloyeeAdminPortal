@@ -1,9 +1,9 @@
-﻿using EpmloyeeAdminPortal.Data;
-using EpmloyeeAdminPortal.Models.Inputs;
+﻿using EmployeeAdminPortal.Data;
+using EmployeeAdminPortal.Models.Inputs;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace EpmloyeeAdminPortal.Services.Validators;
+namespace EmployeeAdminPortal.Services.Validators;
 
 public class GetEmployeeByIdInputValidator : AbstractValidator<GetEmployeeByIdInput>
 {

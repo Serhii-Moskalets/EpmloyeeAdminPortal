@@ -1,6 +1,6 @@
 ﻿using TinyResult;
 
-namespace EpmloyeeAdminPortal.Models.Outputs;
+namespace EmployeeAdminPortal.Models.Outputs;
 
 public class UpdateEmployeeOutput
 {

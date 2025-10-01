@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EpmloyeeAdminPortal\EpmloyeeAdminPortal.csproj" />
+    <ProjectReference Include="..\EpmloyeeAdminPortal\EmployeeAdminPortal.csproj" />
   </ItemGroup>
 
   <ItemGroup>

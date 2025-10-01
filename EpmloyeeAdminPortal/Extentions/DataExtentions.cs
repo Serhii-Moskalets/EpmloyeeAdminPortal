@@ -1,12 +1,12 @@
-﻿using EpmloyeeAdminPortal.Employees.AddEmployee;
-using EpmloyeeAdminPortal.Employees.UpdateEmployee;
-using EpmloyeeAdminPortal.Interfaces.Services;
-using EpmloyeeAdminPortal.Models.Inputs;
-using EpmloyeeAdminPortal.Services;
-using EpmloyeeAdminPortal.Services.Validators;
+﻿using EmployeeAdminPortal.Employees.AddEmployee;
+using EmployeeAdminPortal.Employees.UpdateEmployee;
+using EmployeeAdminPortal.Interfaces.Services;
+using EmployeeAdminPortal.Models.Inputs;
+using EmployeeAdminPortal.Services;
+using EmployeeAdminPortal.Services.Validators;
 using FluentValidation;
 
-namespace EpmloyeeAdminPortal.Extentions;
+namespace EmployeeAdminPortal.Extentions;
 
 public static class DataExtensions
 {

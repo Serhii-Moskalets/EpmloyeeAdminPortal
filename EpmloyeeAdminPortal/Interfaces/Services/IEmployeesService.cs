@@ -1,8 +1,8 @@
-﻿using EpmloyeeAdminPortal.Models.Inputs;
-using EpmloyeeAdminPortal.Models.Outputs;
+﻿using EmployeeAdminPortal.Models.Inputs;
+using EmployeeAdminPortal.Models.Outputs;
 using TinyResult;
 
-namespace EpmloyeeAdminPortal.Interfaces.Services;
+namespace EmployeeAdminPortal.Interfaces.Services;
 
 public interface IEmployeesService
 {

@@ -1,33 +1,32 @@
-﻿using EpmloyeeAdminPortal.Models.Entities;
+﻿using EmployeeAdminPortal.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EpmloyeeAdminPortal.Data
+namespace EmployeeAdminPortal.Data;
+
+public class ApplicationDbContext : DbContext
 {
-    public class ApplicationDbContext : DbContext
+    public ApplicationDbContext(DbContextOptions options)
+        : base(options)
     {
-        public ApplicationDbContext(DbContextOptions options)
-            : base(options)
+    }
+
+    public DbSet<Employee> Employees { get; set; } = null!;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Employee>(entity =>
         {
-        }
+            entity.Property(e => e.Salary)
+                  .HasPrecision(18, 4);
 
-        public DbSet<Employee> Employees { get; set; } = null!;
+            entity.Property(e => e.Name)
+                  .HasMaxLength(200)
+                  .IsRequired();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.Property(e => e.Salary)
-                      .HasPrecision(18, 4);
-
-                entity.Property(e => e.Name)
-                      .HasMaxLength(200)
-                      .IsRequired();
-
-                entity.Property(e => e.IsDeleted)
-                      .HasDefaultValue(false);
-            });
-        }
+            entity.Property(e => e.IsDeleted)
+                  .HasDefaultValue(false);
+        });
     }
 }

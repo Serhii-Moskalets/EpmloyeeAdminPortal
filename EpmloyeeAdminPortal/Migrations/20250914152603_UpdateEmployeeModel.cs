@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace EpmloyeeAdminPortal.Migrations
+namespace EmployeeAdminPortal.Migrations
 {
     /// <inheritdoc />
     public partial class UpdateEmployeeModel : Migration

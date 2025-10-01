@@ -1,7 +1,6 @@
-﻿namespace EpmloyeeAdminPortal.Employees.DeleteEmployee
+﻿namespace EmployeeAdminPortal.Employees.DeleteEmployee;
+
+public class DeleteEmployeeRequest
 {
-    public class DeleteEmployeeRequest
-    {
-        public Guid Id { get; set; }
-    }
+    public Guid Id { get; set; }
 }

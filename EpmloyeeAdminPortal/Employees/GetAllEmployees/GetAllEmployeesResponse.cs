@@ -1,9 +1,8 @@
-﻿using EpmloyeeAdminPortal.Employees.GetAllEmployees.Dtos;
+﻿using EmployeeAdminPortal.Employees.GetAllEmployees.Dtos;
 
-namespace EpmloyeeAdminPortal.Employees.GetEmpoloyeeById
+namespace EmployeeAdminPortal.Employees.GetAllEmployees;
+
+public class GetAllEmployeesResponse
 {
-    public class GetAllEmployeesResponse
-    {
-        public List<EmployeeDto> Employees { get; set; } = [];
-    }
+    public List<EmployeeDto> Employees { get; set; } = [];
 }

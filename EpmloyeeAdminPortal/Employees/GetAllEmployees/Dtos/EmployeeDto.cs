@@ -1,13 +1,12 @@
-﻿namespace EpmloyeeAdminPortal.Employees.GetAllEmployees.Dtos
+﻿namespace EmployeeAdminPortal.Employees.GetAllEmployees.Dtos;
+
+public class EmployeeDto
 {
-    public class EmployeeDto
-    {
-        required public string Name { get; set; }
+    required public string Name { get; set; }
 
-        required public string Email { get; set; }
+    required public string Email { get; set; }
 
-        public string? Phone { get; set; }
+    public string? Phone { get; set; }
 
-        public decimal Salary { get; set; }
-    }
+    public decimal Salary { get; set; }
 }

@@ -1,6 +1,6 @@
-﻿using EpmloyeeAdminPortal.Models.Entities;
+﻿using EmployeeAdminPortal.Models.Entities;
 
-namespace EpmloyeeAdminPortal.Models.Outputs;
+namespace EmployeeAdminPortal.Models.Outputs;
 
 public class GetEmployeeByIdOutput
 {

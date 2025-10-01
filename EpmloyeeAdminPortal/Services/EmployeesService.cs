@@ -1,13 +1,13 @@
-﻿using EpmloyeeAdminPortal.Data;
-using EpmloyeeAdminPortal.Interfaces.Services;
-using EpmloyeeAdminPortal.Models.Inputs;
-using EpmloyeeAdminPortal.Models.Outputs;
+﻿using EmployeeAdminPortal.Data;
+using EmployeeAdminPortal.Interfaces.Services;
+using EmployeeAdminPortal.Models.Inputs;
+using EmployeeAdminPortal.Models.Outputs;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using TinyResult;
 using TinyResult.Enums;
 
-namespace EpmloyeeAdminPortal.Services;
+namespace EmployeeAdminPortal.Services;
 
 public class EmployeesService : IEmployeesService
 {

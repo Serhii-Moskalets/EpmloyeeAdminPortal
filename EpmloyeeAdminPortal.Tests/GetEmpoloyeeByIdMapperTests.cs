@@ -1,10 +1,9 @@
-using EpmloyeeAdminPortal.Employees.GetEmployee;
-using EpmloyeeAdminPortal.Employees.GetEmployee.Dtos;
-using EpmloyeeAdminPortal.Employees.GetEmpoloyeeById;
-using EpmloyeeAdminPortal.Models.Entities;
-using EpmloyeeAdminPortal.Models.Outputs;
+using EmployeeAdminPortal.Employees.GetEmployeeById;
+using EmployeeAdminPortal.Employees.GetEmployeeById.Dtos;
+using EmployeeAdminPortal.Models.Entities;
+using EmployeeAdminPortal.Models.Outputs;
 
-namespace EpmloyeeAdminPortal.Tests;
+namespace EmployeeAdminPortal.Tests;
 
 [TestClass]
 public class GetEmpoloyeeByIdMapperTests

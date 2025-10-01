@@ -1,4 +1,4 @@
-﻿namespace EpmloyeeAdminPortal.Models.Inputs;
+﻿namespace EmployeeAdminPortal.Models.Inputs;
 
 public class DeleteEmployeeInput
 {

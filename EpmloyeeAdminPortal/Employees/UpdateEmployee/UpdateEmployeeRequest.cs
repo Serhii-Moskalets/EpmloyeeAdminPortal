@@ -1,13 +1,12 @@
 ﻿using System.Text.Json.Serialization;
-using EpmloyeeAdminPortal.Employees.UpdateEmployee.Dtos;
+using EmployeeAdminPortal.Employees.UpdateEmployee.Dtos;
 
-namespace EpmloyeeAdminPortal.Employees.UpdateEmployee
+namespace EmployeeAdminPortal.Employees.UpdateEmployee;
+
+public class UpdateEmployeeRequest
 {
-    public class UpdateEmployeeRequest
-    {
-        [JsonIgnore]
-        public Guid Id { get; set; }
+    [JsonIgnore]
+    public Guid Id { get; set; }
 
-        public EmployeeDto Employee { get; set; } = null!;
-    }
+    public EmployeeDto Employee { get; set; } = null!;
 }

@@ -1,16 +1,15 @@
-﻿using EpmloyeeAdminPortal.Employees.UpdateEmployee.Dtos;
-using EpmloyeeAdminPortal.Models.Entities;
-using EpmloyeeAdminPortal.Models.Inputs;
+﻿using EmployeeAdminPortal.Employees.UpdateEmployee.Dtos;
+using EmployeeAdminPortal.Models.Entities;
+using EmployeeAdminPortal.Models.Inputs;
 using Riok.Mapperly.Abstractions;
 
-namespace EpmloyeeAdminPortal.Employees.UpdateEmployee
+namespace EmployeeAdminPortal.Employees.UpdateEmployee;
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Source)]
+
+public partial class UpdateEmployeeMapper
 {
-    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Source)]
+    public partial UpdateEmployeeInput Map(UpdateEmployeeRequest request);
 
-    public partial class UpdateEmployeeMapper
-    {
-        public partial UpdateEmployeeInput Map(UpdateEmployeeRequest request);
-
-        public partial Employee Map(EmployeeDto dto);
-    }
+    public partial Employee Map(EmployeeDto dto);
 }

@@ -1,4 +1,4 @@
-﻿namespace EpmloyeeAdminPortal.Models.Entities;
+﻿namespace EmployeeAdminPortal.Models.Entities;
 
 public class Employee
 {

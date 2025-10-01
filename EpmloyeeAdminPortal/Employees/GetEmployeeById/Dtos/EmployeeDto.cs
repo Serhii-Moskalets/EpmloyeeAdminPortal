@@ -1,4 +1,4 @@
-﻿namespace EpmloyeeAdminPortal.Employees.GetEmployee.Dtos;
+﻿namespace EmployeeAdminPortal.Employees.GetEmployeeById.Dtos;
 
 public class EmployeeDto
 {

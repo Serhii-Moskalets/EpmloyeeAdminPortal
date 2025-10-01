@@ -1,16 +1,15 @@
-﻿using EpmloyeeAdminPortal.Employees.GetAllEmployees.Dtos;
-using EpmloyeeAdminPortal.Models.Entities;
-using EpmloyeeAdminPortal.Models.Outputs;
+﻿using EmployeeAdminPortal.Employees.GetAllEmployees.Dtos;
+using EmployeeAdminPortal.Models.Entities;
+using EmployeeAdminPortal.Models.Outputs;
 using Riok.Mapperly.Abstractions;
 
-namespace EpmloyeeAdminPortal.Employees.GetEmpoloyeeById
+namespace EmployeeAdminPortal.Employees.GetAllEmployees;
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+
+public partial class GetAllEmployeeMapper
 {
-    [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+    public partial GetAllEmployeesResponse Map(GetAllEmployeeOutput output);
 
-    public partial class GetAllEmployeeMapper
-    {
-        public partial GetAllEmployeesResponse Map(GetAllEmployeeOutput output);
-
-        public partial EmployeeDto Map(Employee employee);
-    }
+    public partial EmployeeDto Map(Employee employee);
 }

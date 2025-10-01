@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace EpmloyeeAdminPortal.Employees.UpdateEmployee;
+namespace EmployeeAdminPortal.Employees.UpdateEmployee;
 
 public class UpdateEmployeeValidator : AbstractValidator<UpdateEmployeeRequest>
 {
